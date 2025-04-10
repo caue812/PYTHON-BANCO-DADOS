@@ -9,6 +9,15 @@ def executar_produto():
     opcao_desejada = questionary.select("Escolha o menu desejado dos produtos", opcoes).ask()
     if opcao_desejada == "Cadastrar":
        __cadastrar() # C
+    elif opcao_desejada == "Listar todos":
+       __listar_todos()
+
+
+def __listar_todos():
+   produtos = produto_repositorio.listar_todos()
+   print("LIsta de produtos:")
+   for produto in produtos:
+      print("id:", produto["id"], "Nome:", produto["nome"])
 
 
 # Funções com um/dois underline(s) antes do nome são consideradas
