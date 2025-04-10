@@ -1,23 +1,15 @@
-from mysql.connector import connect
+import os
 
-if __name__== "__main__":
-    print("Tentando conectar no banco de dados")
+import questionary
 
-    conexao = connect(
-        host="127.0.0.1", # host é a máquina q está o banco de dados 
-        port=3306, # porta padrão do MySQL
-        user="root",
-        password="admin",
-        database="super_empresa"
-    )
-    print("Conexão realizada com sucesso")
-    # Criar um cursor que nos permitirá executar comandos no banco de dados
-    cursor = conexao.cursor()
-    # Definir qual será o comando que iremos executar, neste caso será um insert
-    cursor.execute("insert into produtos (nome) values ('X-calabresa')")
+from src.telas.produto_tela import executar_produto
 
-    # Commit é necessário pois sem ele o insert n será concretizado no bd
-    conexao.commit()
-    # Fechar a conexão com bd
-    conexao.close()
-    print("Produto cadastro com sucesso")
+if __name__ == "__main__":
+   os.system("cls") # Limpa a tela 
+   opcoes = ["Cliesntes", "Produtos", "Sair"]
+   opcao_desejada = ""
+   while opcao_desejada != "Sair":
+    opcao_desejada = questionary.select("Escolha o menu desejado", opcoes).ask()
+    
+    if opcao_desejada == "Produtos":  
+        executar_produto()
